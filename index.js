@@ -19,7 +19,9 @@ function isZip(path, cb) {
                         });
                     } else {
                         if (buffer && buffer.length === 4) {
-                            cb(null, (buffer[0] === 0x50 && buffer[1] === 0x4b && (buffer[2] === 0x03 || buffer[2] === 0x05 || buffer[2] === 0x07) && (buffer[3] === 0x04 || buffer[3] === 0x06 || buffer[3] === 0x08)));
+                            FS.close(fd, function() {
+                              cb(null, (buffer[0] === 0x50 && buffer[1] === 0x4b && (buffer[2] === 0x03 || buffer[2] === 0x05 || buffer[2] === 0x07) && (buffer[3] === 0x04 || buffer[3] === 0x06 || buffer[3] === 0x08)));
+                            });
                         } else {
                             cb(null, false);
                         }
